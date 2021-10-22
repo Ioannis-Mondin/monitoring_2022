@@ -20,3 +20,32 @@ streams <- data.frame(water, fishes)
 streams
 View(screams)
 
+# From now on, we are going to import and/or export data!
+# setwd for Windows
+setwd("C:/lab/")
+
+# Let's export our table
+# 
+write.table(streams, file="my_first_table.txt")
+
+#Some colleagues did sent us some file. How can we import the table in R?
+
+read.table("my_first_table.txt")
+
+# let's assign it to an object inside R
+
+yiannistable <- read.table("my_first_table.txt")
+yiannistable
+
+# the first statistics for lazy beautiful people
+
+summary(yiannistable)
+#the media ειναι ο μεσος αριθμος, the mean ειναι ο μεσος ορος
+
+#Marta does not like water
+#Marta wants to get info only on fishes
+summary(yiannistable$fishes)
+
+#histogram
+hist(ducciotable$fishes)
+
