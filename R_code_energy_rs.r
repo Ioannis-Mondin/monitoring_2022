@@ -7,3 +7,7 @@ setwd("C:/lab/")
 install.packages("rgdal")
 
 library(rgdal)
+
+l1992 <- brick("defor1_.jpg") # image of 1992
+
+plotRGB(l1992, r=1, g=2, b=3, stretch="Lin")
