@@ -69,3 +69,8 @@ plot(EN13, col=cl)
 #the right way
 
 EN <- stack(EN01, EN02, EN03, EN04, EN05, EN06, EN07, EN08, EN09, EN10, EN11, EN12, EN13)
+plot(EN, col=cl)
+
+#rgb
+plot(EN$EN_0001, col=cl)
+plotRGB(EN, r=1, g=7, b=13, stretch="lin")
