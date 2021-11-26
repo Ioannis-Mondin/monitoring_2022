@@ -33,6 +33,20 @@ EN08 <- raster("EN_0008.png")
 EN09 <- raster("EN_0009.png")
 EN10 <- raster("EN_0010.png")
 EN11 <- raster("EN_0011.png")
+
+plot(EN, col=cl)
+
+#plot only the first image from the stack
+#check the stack names
+EN
+plot(EN$EN_0001, col=cl)
+
+#rgb
+plotRGB(EN, r=1, g=7, b=13, stretch="lin")
+
+
+
+
 EN12 <- raster("EN_0012.png")
 EN13 <- raster("EN_0013.png")
 
