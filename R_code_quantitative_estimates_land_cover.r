@@ -1,6 +1,8 @@
 # 03/10/2021
 
 library(raster)
+library(RStoolbox)
+library(ggplot2)
 setwd("C:/lab/")
 # brick
 
@@ -27,25 +29,37 @@ plotRGB(l2006, r=1, g=2, b=3, stretch="lin")
 
 # Unfupervised classification function
 l1992c <- unsuperClass(l1992, nClasses=2)
+l1992
 
-#Value 1: Agriculture and water
-forests
+plot(l1992$map)
 
-36664
-304628
+# Value 1: Agricultural areas and water
+# Value 2: Forests
 
 plot(l1992c$map)
 freq(l1992c$map)
+#     value  count
+# [1, ]    1  36664
+# [2, ]    2 304628
+
+# agricultural areas and water (class 1) 36664
+# forest (class 2) 304628
 
 total <- 341292
 propagri <- 36664/total
 propforest <- 304628/total
 
+
+
+
+# Agriculture and water: 0.1074271 ~ 0.11
+# Forest: 0.8925729 ~ 0.89
+
 # build a dataframe
 cover <- c("Forest", "Agriculture")
 prop1992 <- c(0.8925729, 0.1074271)
 
- 
-
 proportion1992 <- data.frame(cover, prop1992)
 ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
+
+grid.arrange(p1, p2, nrow=1)
