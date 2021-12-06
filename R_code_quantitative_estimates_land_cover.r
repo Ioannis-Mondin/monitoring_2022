@@ -1,7 +1,7 @@
 # 03/10/2021
 
 library(raster)
-library(RStoolbox)
+library(RStoolbox) #we will use this package to make the classification
 library(ggplot2)
 setwd("C:/lab/")
 # brick
@@ -12,7 +12,7 @@ rlist <- list.files(pattern="defor")
 rlist
 
 # 2 apply: apply a fuction to a list
-list_rast <- lapply(rlist, brick)
+list_rast <- lapply(rlist, brick) # lapply(x, FUN)
 list_rast
 
 plot(list_rast[[1]])
@@ -27,39 +27,77 @@ plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
 l2006 <- list_rast[[2]]
 plotRGB(l2006, r=1, g=2, b=3, stretch="lin")
 
-# Unfupervised classification function
-l1992c <- unsuperClass(l1992, nClasses=2)
+# Unsupervised classification function (automated function => we save a lot of time
+l1992c <- unsuperClass(l1992, nClasses=2) #unsuperClass(x, #number_of_Classes#)
 l1992
 
-plot(l1992$map)
 
 # Value 1: Agricultural areas and water
 # Value 2: Forests
+# It differs from time to time
 
 plot(l1992c$map)
 freq(l1992c$map)
 #     value  count
-# [1, ]    1  36664
-# [2, ]    2 304628
+# [1, ]    1  35925
+# [2, ]    2 305367
 
-# agricultural areas and water (class 1) 36664
-# forest (class 2) 304628
+# agricultural areas and water (class 1) 35925
+# forest (class 2) 305367
 
 total <- 341292
-propagri <- 36664/total
-propforest <- 304628/total
+propagri <- 35925/total # proportion of agricultural areas and water
+propforest <- 305367/total # proportion of forest
 
-
-
-
-# Agriculture and water: 0.1074271 ~ 0.11
-# Forest: 0.8925729 ~ 0.89
+# Agriculture and water: 0.1052618 ~ 0.10
+# Forest: 0.8947382 ~ 0.90
 
 # build a dataframe
 cover <- c("Forest", "Agriculture")
-prop1992 <- c(0.8925729, 0.1074271)
+prop1992 <- c(0.8947382, 0.1052618)
+# or better, we can do this, instead
+# prop1992 <- c(propforest, propagri)
 
 proportion1992 <- data.frame(cover, prop1992)
 ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
 
+# The same process about 2006 image
+l2006c <- unsuperClass(l2006, nClasses=2) # unsuperClass(x, nClasses) 
+l2006c
+
+plot(l2006c$map)
+freq(l2006c$map)
+#     value   count
+# [1, ]    1  163399 # agricultural areas and water
+# [2, ]    2  179327 # forest
+
+# agricultural areas and water (class 1) 35925
+# forest (class 2) 305367
+
+total <- 341292
+propagri <- 163399/total # proportion of agricultural areas and water
+propforest <- 179327/total # proportion of forest
+
+# 2006
+# Agriculture and water:
+# Forest:
+
+# build a dataframe
+cover <- c("Forest", "Agriculture") #unnecessary, -remains the same-
+prop2006 <- c(0.478766, 0.5254357)
+
+proportion <- data.frame(cover, prop1992, prop2006)
+ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+
+proportion2006 <- data.frame(cover, prop2006)
+ggplot(proportion1992, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+
+#plotting all together
+
+p1 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+p2 <- ggplot(proportion1992, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+
 grid.arrange(p1, p2, nrow=1)
+ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
+ggplot(proportion, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
+
