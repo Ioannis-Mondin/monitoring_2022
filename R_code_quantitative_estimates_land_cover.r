@@ -94,10 +94,34 @@ ggplot(proportion1992, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="i
 
 #plotting all together
 
-p1 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
-p2 <- ggplot(proportion1992, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+p1 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
+p2 <- ggplot(proportion1992, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
 
+# plot with gridExtra package:
 grid.arrange(p1, p2, nrow=1)
-ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
-ggplot(proportion, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
 
+library(patchwork)
+# or plot with patchwork package:
+p1+p2
+# if you want to put one graph on top of the other
+p1/p2
+
+# patchwork is working even with raster data, but they should be plotted with
+# instead of using plotRGB we are going to use ggRGB
+# common stuff (from the first lessons):
+plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
+plotRGB(l1992, r=1, g=2, b=3, stretch="hist")
+plotRGB(l1992, r=1, g=2, b=3, stretch="sqrt") # sort of moderation of data
+plotRGB(l1992, r=1, g=2, b=3, stretch="log")
+
+l2006 <- list_rast[[2]]
+gp1 <- ggRGB(l1992, r=1, g=2, b=3)
+gp5 <- ggRGB(l2006, r=1, g=2, b=3)
+
+# multitemporal patchwork
+gp1 <- ggRGB(l1992, r=1, g=2, b=3)
+gp5 <- ggRGB(l2006, r=1, g=2, b=3)
+
+gp1 + gp5
+
+gp1 / gp5
