@@ -109,11 +109,20 @@ p1/p2
 # patchwork is working even with raster data, but they should be plotted with
 # instead of using plotRGB we are going to use ggRGB
 # common stuff (from the first lessons):
-plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
-plotRGB(l1992, r=1, g=2, b=3, stretch="hist")
-plotRGB(l1992, r=1, g=2, b=3, stretch="sqrt") # sort of moderation of data
-plotRGB(l1992, r=1, g=2, b=3, stretch="log")
+plotRGB(l1992, r=1, g=2, b=3, stretch="Lin")
+ggRGB(l1992, r=1, g=2, b=3)
+ggRGB(l1992, r=1, g=2, b=3, stretch="lin")
+ggRGB(l1992, r=1, g=2, b=3, stretch="hist")
+ggRGB(l1992, r=1, g=2, b=3, stretch="sqrt") # sort of moderation of data
+ggRGB(l1992, r=1, g=2, b=3, stretch="log")
 
+# patchwork
+gp1 <- ggRGB(l1992, r=1, g=2, b=3, stretch="lin")
+gp2 <- ggRGB(l1992, r=1, g=2, b=3, stretch="hist")
+gp3 <- ggRGB(l1992, r=1, g=2, b=3, stretch="sqrt") # sort of moderation of data
+gp4 <- ggRGB(l1992, r=1, g=2, b=3, stretch="log")
+
+gp1 + gp2 + gp3 + gp4
 l2006 <- list_rast[[2]]
 gp1 <- ggRGB(l1992, r=1, g=2, b=3)
 gp5 <- ggRGB(l2006, r=1, g=2, b=3)
