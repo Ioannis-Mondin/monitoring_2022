@@ -33,7 +33,7 @@ points(absences, pch=19, col="red")
 path <- system.file("external", package="sdm")
 lst <- list.files(path, pattern='asc')
 
-# you can use the lapply function with the raster function ...........????
+# you can use the lapply function with the raster function but in this case it...........????
 
 preds <- stack(lst)
 
@@ -51,3 +51,22 @@ points(presences, pch=19)
 
 plot(preds$precipitation, col=cl)
 points(presences, pch=19)
+
+# day 2
+# import the source
+
+setwd("C:/lab/")
+source("R_code_source_sdm.r")
+
+preds
+
+# these are the predictors: elevation, precipitation, vegetation, temperature
+# in the theoretical slide of SDMs we should use individually .....
+
+# species are call training data
+
+# ~ means equal in R
+#let's explain to the... which 
+# y=bx + a (+b1x1+b2x2+b3x3)
+datasdm <- sdmData(train=species, predictors=preds)
+m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
