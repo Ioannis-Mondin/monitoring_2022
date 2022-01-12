@@ -67,6 +67,20 @@ preds
 
 # ~ means equal in R
 #let's explain to the... which 
-# y=bx + a (+b1x1+b2x2+b3x3)
+# formula: y=bx + a (+b1x1+b2x2+b3x3) (a: intercept)
 datasdm <- sdmData(train=species, predictors=preds)
+datasdm
 m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
+
+#day 3
+p1 <- predict(m1, newdata=preds)
+plot(p1, col=cl)
+
+points(presences, pch=19)
+
+# stack everything together
+s1 <- stack(preds, p1)
+plot(s1, col=cl)
+
+names(s1) <- c('Elevation', 'Precipitation', 'Temperature', 'Vegetation', 'Probability')
+plot(s1, col=cl)
