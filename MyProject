@@ -24,7 +24,7 @@ laistack <- stack(list_rast)
 laistack
 
 l2018 <- laistack$Leaf.Area.Index.333m.1
-l2018 <- laistack$Leaf.Area.Index.333m.2
+l2019 <- laistack$Leaf.Area.Index.333m.2
 
 ggplot() +
 geom_raster(l2018, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.333m.1)) +
@@ -50,26 +50,26 @@ geom_raster(l2019, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.1km.2)) +
 scale_fill_viridis(option="viridis") +
 ggtitle("LAI - June 2020")
 
-p1 / p2
+p1ot / plot2
 
 # you can crop your image on a certain area
 # longitude from 0 to 10
 # latitude from 30 to 50
 
 # crop the stack to the extent of Sicily
-ext <- c(0, 20, 30, 50)
-lwinter_cropped <- crop(lwinter, ext)
-lsummer_cropped <- crop(lsummer, ext)
+ext <- c(23.8481, 24.0476, 38.0098, 38.1278)
+l2018_cropped <- crop(l2018, ext)
+l2019_cropped <- crop(l2019, ext)
 
-p1 <- ggplot() +
-geom_raster(lwinter_cropped, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.1km.1)) +
-scale_fill_viridis(option="viridis") +
-ggtitle("LAI - December 2019")
+plot1 <- ggplot() +
+geom_raster(l2018_cropped, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.333m.1)) +
+scale_fill_viridis(option="plasma") +
+ggtitle("LAI - 30 June 2018")
 
-p2 <- ggplot() +
-geom_raster(lsummer_cropped, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.1km.2)) +
-scale_fill_viridis(option="viridis") +
-ggtitle("LAI - June 2020")
+plot2 <- ggplot() +
+geom_raster(l2019_cropped, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.333m.2)) +
+scale_fill_viridis(option="plasma") +
+ggtitle("LAI - 30 June 2019")
 
-p1 / p2
+plot1 / plot2
 
