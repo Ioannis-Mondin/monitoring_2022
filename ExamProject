@@ -10,7 +10,7 @@ lai20190630
 
 library(ggplot2)
 library(RStoolbox)
-
+library(viridis)
 
 
 ###day 2
