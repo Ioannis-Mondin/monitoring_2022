@@ -50,6 +50,7 @@ geom_raster(l2022, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.333m.2)) +
 scale_fill_viridis(option="viridis") +
 ggtitle("LAI - 10 September 2022")
 
+png()
 plot1 / plot2
 
 # you can crop your image on a certain area
