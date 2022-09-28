@@ -1,3 +1,10 @@
+# R code for my Monitoring Ecosystem Changes and Functioning exam in 2022
+
+# This code is for analyzing Copernicus Leaf Area Index data in R
+
+# A particular focus in the analysis here is the deforestation and palm plantations in Malaysia
+
+
 library(ncdf4)
 library(raster)
 
@@ -37,5 +44,5 @@ geom_raster(LAI2022_cropped, mapping = aes(x=x, y=y, fill=Leaf.Area.Index.333m.1
 scale_fill_viridis(option="inferno") +
 ggtitle("LAI - 10 September 2022")
 
-png()
+png(file = "Gironde Fire - LAI before and after")
 LAI_plot_1 / LAI_plot_2
