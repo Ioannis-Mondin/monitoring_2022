@@ -2,17 +2,18 @@
 
 # This code is for analyzing Copernicus Leaf Area Index data in R
 
-# A particular focus in the analysis here is the deforestation and palm plantations in Malaysia
+# I analysed "Copernicus" data in order to represent a view of the impact of the fire in Gironde -department in the Nouvelle-Aquitaine region of Southwestern France-, 
+# which happened between 17 and 21 of July 
 
+# setting my working directory
+setwd("C:/lab/ExamProject/")
 
 library(ncdf4)
 library(raster)
-
-setwd("C:/lab/ExamProject/")
-
 library(ggplot2)
 library(RStoolbox)
 library(viridis)
+library(patchwork)
 
 
 rlist <- list.files(pattern="LAI")
@@ -27,8 +28,7 @@ LAI_stack
 LAI_2022 <- LAI_stack$Leaf.Area.Index.333m.1
 LAI_2021 <- LAI_stack$Leaf.Area.Index.333m.2
 
-library(patchwork)
-
+# coordinates of Gironde (longitude: -1.4181, -0.4093, latidude: 44.2467, 44.7766; latitude)
 ext <- c(-1.4181, -0.4093, 44.2467, 44.7766)
 
 LAI2021_cropped <- crop(LAI_2021, ext)
