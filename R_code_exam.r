@@ -2,7 +2,7 @@
 
 # In this code Leaf Area Index (LAI) data is being analyzed 
 
-# I analysed "Copernicus" data in order to represent a view of the impact of the fire in Gironde 
+# I analyzed "Copernicus" data in order to represent a view of the impact of the fire in Gironde 
 # -department in the Nouvelle-Aquitaine region of Southwestern France-, 
 # which happened mostly in July and August of 2022
 
